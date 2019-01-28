@@ -10,12 +10,11 @@ public class HelloFresh extends BaseClass {
 
     @Test
     public void test() {
-        String searchResultsApiJson = SearchApiRequest.makeSearchRequest();
-        System.out.println(searchResultsApiJson);
+        final String searchResultsApiJson = SearchApiRequest.makeSearchRequest();
         final SearchApiJson searchApiJson = SearchApiJson.from(searchResultsApiJson);
         final Result result = searchApiJson.getResult();
         assertEquals(result.getName(), "Germany");
-        assertEquals(result.getAlpha2_code(), "DE");
-        assertEquals(result.getAlpha3_code(), "DEU");
+        assertEquals(result.getAlpha2Code(), "DE");
+        assertEquals(result.getAlpha3Code(), "DEU");
     }
 }
