@@ -12,12 +12,12 @@ public class SearchApiJson {
 
     private final JsonPath jsonPath;
 
-    public static SearchApiJson from(String json) {
-        return new SearchApiJson(json);
-    }
-
     private SearchApiJson(String json) {
         this.jsonPath = JsonPath.from(json);
+    }
+
+    public static SearchApiJson from(String json) {
+        return new SearchApiJson(json);
     }
 
     /**
@@ -34,8 +34,4 @@ public class SearchApiJson {
         return jsonPath.getList(RESULT_JSON_PATH, Result.class);
     }
 
-/*    public Set<String> getName() {
-        return getResults().stream().map(Result::getName)
-                .collect(Collectors.toCollection(LinkedHashSet::new));
-    }*/
 }

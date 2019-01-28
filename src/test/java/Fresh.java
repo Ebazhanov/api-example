@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
 
-public class HelloFresh extends BaseClass {
+public class Fresh extends BaseClass {
 
     @Test
     public void test() {

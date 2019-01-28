@@ -11,8 +11,7 @@ public class Result {
     public Result(
             @JsonProperty("name") String name,
             @JsonProperty("alpha2_code") String alpha2Code,
-            @JsonProperty("alpha3_code") String alpha3Code)
-    {
+            @JsonProperty("alpha3_code") String alpha3Code) {
         this.name = name;
         this.alpha2Code = alpha2Code;
         this.alpha3Code = alpha3Code;
