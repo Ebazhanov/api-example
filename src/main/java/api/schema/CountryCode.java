@@ -2,13 +2,13 @@ package api.schema;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Result {
+public class CountryCode {
 
     private final String name;
     private final String alpha2Code;
     private final String alpha3Code;
 
-    public Result(
+    public CountryCode(
             @JsonProperty("name") String name,
             @JsonProperty("alpha2_code") String alpha2Code,
             @JsonProperty("alpha3_code") String alpha3Code) {

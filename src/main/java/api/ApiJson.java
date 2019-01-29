@@ -1,6 +1,6 @@
 package api;
 
-import api.schema.Result;
+import api.schema.CountryCode;
 import io.qameta.allure.Step;
 import io.restassured.path.json.JsonPath;
 
@@ -25,16 +25,16 @@ public class ApiJson {
      * @return get result for one country
      */
     @Step
-    public Result getResult() {
-        return jsonPath.getObject(RESULT_JSON_PATH, Result.class);
+    public CountryCode getCountryCode() {
+        return jsonPath.getObject(RESULT_JSON_PATH, CountryCode.class);
     }
 
     /**
      * @return get result for multiple countries in one response
      */
     @Step
-    public List<Result> getResults() {
-        return jsonPath.getList(RESULT_JSON_PATH, Result.class);
+    public List<CountryCode> getResults() {
+        return jsonPath.getList(RESULT_JSON_PATH, CountryCode.class);
     }
 
 }

@@ -2,7 +2,7 @@ package com.tests;
 
 import api.ApiJson;
 import api.ApiRequest;
-import api.schema.Result;
+import api.schema.CountryCode;
 import base.BaseClass;
 import io.qameta.allure.Feature;
 import org.hamcrest.Matchers;
@@ -20,7 +20,7 @@ public class Fresh extends BaseClass {
     public void getRequestWithSingleCountry() {
         final String resultsApiJson = ApiRequest.makeGetRequest();
         final ApiJson apiJson = ApiJson.from(resultsApiJson);
-        final Result result = apiJson.getResult();
+        final CountryCode result = apiJson.getCountryCode();
         assertEquals(result.getName(), "Germany");
         assertEquals(result.getAlpha2Code(), "DE");
         assertEquals(result.getAlpha3Code(), "DEU");
@@ -30,7 +30,7 @@ public class Fresh extends BaseClass {
     public void getRequest() {
         final String resultsApiJson = ApiRequest.makeGetRequest();
         final ApiJson apiJson = ApiJson.from(resultsApiJson);
-        final Result result = apiJson.getResult();
+        final CountryCode result = apiJson.getCountryCode();
         assertEquals(result.getName(), "Germany");
         assertEquals(result.getAlpha2Code(), "DE");
         assertEquals(result.getAlpha3Code(), "DEU");
