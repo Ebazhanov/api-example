@@ -28,33 +28,46 @@ public class Fresh extends BaseClass {
         assertEquals(result.getAlpha3Code(), "DEU");
     }
 
-
     @Test
     public void postSpecific_TC() {
-        JSONObject jsonObj = new JSONObject().put("name", "Test Country").put("alpha2_code", "TC").put("alpha3_code",
-                "TCY");
-        given().contentType("application/json") // another way to specify content type
-                .body(jsonObj.toString()) // use jsonObj toString method
-                .when().post("http://services.groupkt.com/country/register").then().assertThat().statusCode(200)
+
+        String NAME = "Test Country";
+        String ALFA2CODE = "TC";
+        String ALFA3CODE = "TC";
+
+        given().contentType("application/json")
+                .body(getJson(NAME, ALFA2CODE, ALFA3CODE))
+                .when()
+                .post("http://services.groupkt.com/country/register")
+                .then()
+                .assertThat()
+                .statusCode(200)
                 .body("RestResponse.messages[0]", Matchers.equalTo("Country added or overwritten [TC]."));
+    }
+
+    private String getJson(String name, String alpha2Code, String alpha3Code) {
+        JSONObject jsonObj = new JSONObject()
+                .put("name", name)
+                .put("alpha2_code", alpha2Code)
+                .put("alpha3_code", alpha3Code);
+        return jsonObj.toString();
+
     }
 
 
     @Test
-    public void new_country_adding_using_post_request() {
+    public void postRequest1() {
         String end_point = "/register";
-
         RestAssured.baseURI = "http://services.groupkt.com/country" + end_point;
         RequestSpecification request = RestAssured.given();
-
         JSONObject requestParams = new JSONObject();
         requestParams.put("name", "Test Country");
         requestParams.put("alpha2_code", "TC");
         requestParams.put("alpha3_code", "TCY");
-
         request.header("Content-Type", "application/json");
-        //request.body(requestParams.toJSONString());
+        request.body(requestParams.toString());
         Response response = request.post(end_point);
+        System.out.println(response);
     }
 
 }
