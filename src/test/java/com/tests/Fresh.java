@@ -27,16 +27,6 @@ public class Fresh extends BaseClass {
     }
 
     @Test
-    public void getRequest() {
-        final String resultsApiJson = ApiRequest.makeGetRequest();
-        final ApiJson apiJson = ApiJson.from(resultsApiJson);
-        final CountryCode result = apiJson.getCountryCode();
-        assertEquals(result.getName(), "Germany");
-        assertEquals(result.getAlpha2Code(), "DE");
-        assertEquals(result.getAlpha3Code(), "DEU");
-    }
-
-    @Test
     public void postSpecific_TC() {
 
         String NAME = "Test Country";
