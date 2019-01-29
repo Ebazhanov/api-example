@@ -1,15 +1,17 @@
 package api;
 
+import io.qameta.allure.Step;
+import io.restassured.RestAssured;
+
 import java.util.ResourceBundle;
 
-import static io.restassured.RestAssured.given;
-
-public class SearchApiRequest {
+public class ApiRequest {
 
     private static final String SEARCH_API_URL = ResourceBundle.getBundle("test").getString("SEARCH_API_URL");
 
-    public static String makeSearchRequest() {
-        String json = given()
+    @Step
+    public static String makeGetRequest() {
+        String json = RestAssured.given()
                 .log().all()
                 .then().log().all()
                 .request()
@@ -19,4 +21,5 @@ public class SearchApiRequest {
                 .asString();
         return json;
     }
+
 }
