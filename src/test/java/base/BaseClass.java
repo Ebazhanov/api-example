@@ -9,7 +9,7 @@ public class BaseClass {
 
     @BeforeMethod(alwaysRun = true)
     public void beforeTest() {
-        RestAssured.baseURI = "http://services.groupkt.com/country/get/iso2code/DE";
+        RestAssured.baseURI = "http://services.groupkt.com/country/";
     }
 
 }
