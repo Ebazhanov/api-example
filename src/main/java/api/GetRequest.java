@@ -7,10 +7,11 @@ public class GetRequest {
 
     @Step
     public static String countryGetRequest(String url, String alpha2Code) {
-        String json = RestAssured.given()
+        String json = RestAssured
+                .given()
+                .then()
+                .statusCode(200)
                 .log().all()
-                .then().log().all()
-                .request()
                 .when()
                 .get(url + alpha2Code)
                 .getBody()

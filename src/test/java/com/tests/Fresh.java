@@ -6,15 +6,15 @@ import api.schema.CountryCode;
 import base.BaseClass;
 import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
+import io.restassured.RestAssured;
 import org.hamcrest.Matchers;
 import org.json.JSONObject;
-import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import java.util.List;
 
 import static api.GetRequest.countryGetRequest;
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.hasItems;
+import static org.hamcrest.Matchers.nullValue;
 import static org.testng.Assert.assertEquals;
 
 @Feature("API test examples")
@@ -34,20 +34,27 @@ public class Fresh extends BaseClass {
     @Test
     @Description("Get all countries and validate that US, DE and GB were returned in the response")
     public void getRequestAllCountries() {
-        final String resultsApiJson = countryGetRequest("get/", "all");
-        final ApiJson apiJson = ApiJson.from(resultsApiJson);
-        final List<CountryCode> result = apiJson.getAllCountriesCodes();
-        Assert.assertSame(result, "US, DE and GB");
+        RestAssured
+                .given()
+                .get("http://services.groupkt.com/country/get/all")
+                .then()
+                .statusCode(200)
+                .log().all()
+                .body("RestResponse.result.alpha2_code", hasItems("US", "GB", "DE"))
+                .body("RestResponse.result.alpha3_code", hasItems("USA", "GBR", "DEU"));
     }
 
     @Test
     @Description("Get information for non-existent countries and validate the response")
     public void getRequestWithNonExistentCountry() {
         String nonExistentCountry = "RR";
-        final String resultsApiJson = countryGetRequest("get/iso2code/", nonExistentCountry);
-        final ApiJson apiJson = ApiJson.from(resultsApiJson);
-        final CountryCode result = apiJson.getCountryCode();
-        assertEquals(result.getAlpha2Code(), nonExistentCountry);
+        RestAssured.given()
+                .get("/get/iso2code/" + nonExistentCountry)
+                .then()
+                .statusCode(200)
+                .log().all()
+                .body("RestResponse.result", nullValue())
+                .body("RestResponse.messages[0]", Matchers.equalTo("No matching country found for requested code [RR]."));
     }
 
     @Test
@@ -59,11 +66,12 @@ public class Fresh extends BaseClass {
         given().contentType("application/json")
                 .body(getJson(name, alfa2Code, alfa3Code))
                 .when()
-                .post("/register")
+                .post("/register/")
                 .then()
                 .assertThat()
                 .statusCode(200)
-                .body("RestResponse.messages[0]", Matchers.equalTo("Country added or overwritten [TC]."));
+                .log().all()
+                .body("message", Matchers.contains("ullnllnullnullvar"));
     }
 
     private String getJson(String name, String alpha2Code, String alpha3Code) {
