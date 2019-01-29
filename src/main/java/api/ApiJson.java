@@ -33,7 +33,7 @@ public class ApiJson {
      * @return get result for multiple countries in one response
      */
     @Step
-    public List<CountryCode> getResults() {
+    public List<CountryCode> getAllCountriesCodes() {
         return jsonPath.getList(RESULT_JSON_PATH, CountryCode.class);
     }
 

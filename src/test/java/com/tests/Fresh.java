@@ -8,7 +8,10 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
 import org.hamcrest.Matchers;
 import org.json.JSONObject;
+import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.util.List;
 
 import static api.GetRequest.countryGetRequest;
 import static io.restassured.RestAssured.given;
@@ -26,6 +29,15 @@ public class Fresh extends BaseClass {
         assertEquals(result.getName(), name);
         assertEquals(result.getAlpha2Code(), alfa2Code);
         assertEquals(result.getAlpha3Code(), alfa3Code);
+    }
+
+    @Test
+    @Description("Get all countries and validate that US, DE and GB were returned in the response")
+    public void getRequestAllCountries() {
+        final String resultsApiJson = countryGetRequest("get/", "all");
+        final ApiJson apiJson = ApiJson.from(resultsApiJson);
+        final List<CountryCode> result = apiJson.getAllCountriesCodes();
+        Assert.assertSame(result, "US, DE and GB");
     }
 
     @Test
