@@ -19,4 +19,21 @@ public class AuthenticationPage {
         return new CreateAnAccountPage();
     }
 
+    @Step
+    public AuthenticationPage enterExistingEmail(String existingUserEmail) {
+        $(By.id("email")).setValue(existingUserEmail);
+        return this;
+    }
+
+    @Step
+    public AuthenticationPage enterExistingPassword(String existingUserPassword) {
+        $(By.id("passwd")).setValue(existingUserPassword);
+        return this;
+    }
+
+    @Step
+    public AuthenticationPage clickSignInButton() {
+        $(By.id("SubmitLogin")).click();
+        return this;
+    }
 }

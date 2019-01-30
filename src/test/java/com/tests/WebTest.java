@@ -32,8 +32,7 @@ public class WebTest extends BaseClass {
                 .signInButton()
                 .enterEmailInAccountBlock(email)
                 .creatAnAccountButton()
-                .fillInPersonalData("John")
-        ;
+                .fillInPersonalData("PersonalData");
         $("h1").waitUntil(Condition.visible, 1000).shouldHave(Condition.text("MY ACCOUNT"));
         assertEquals($(By.className("account")).getText(), firstName + " " + lastName);
         assertTrue($(By.className("info-account")).getText().contains("Welcome to your account."));
@@ -46,10 +45,10 @@ public class WebTest extends BaseClass {
     public void logInTest() {
         String fullName = "Joe Black";
         new HomePage()
-                .signInButton();
-        $(By.id("email")).setValue(existingUserEmail);
-        $(By.id("passwd")).setValue(existingUserPassword);
-        $(By.id("SubmitLogin")).click();
+                .signInButton()
+                .enterExistingEmail(existingUserEmail)
+                .enterExistingPassword(existingUserPassword)
+                .clickSignInButton();
         $("h1").waitUntil(Condition.visible, 1000).shouldHave(Condition.text("MY ACCOUNT"));
         $(".account").shouldHave(Condition.text(fullName));
         assertTrue($(By.className("info-account")).getText().contains("Welcome to your account."));
@@ -60,10 +59,10 @@ public class WebTest extends BaseClass {
     @Test
     public void checkoutTest() {
         new HomePage()
-                .signInButton();
-        $(By.id("email")).sendKeys(existingUserEmail);
-        $(By.id("passwd")).sendKeys(existingUserPassword);
-        $(By.id("SubmitLogin")).click();
+                .signInButton()
+                .enterExistingEmail(existingUserEmail)
+                .enterExistingPassword(existingUserPassword)
+                .clickSignInButton();
         $(By.linkText("Women")).click();
         $(By.xpath("//a[@title='Faded Short Sleeve T-shirts']/ancestor::li")).click();
         $(By.xpath("//a[@title='Faded Short Sleeve T-shirts']/ancestor::li")).click();

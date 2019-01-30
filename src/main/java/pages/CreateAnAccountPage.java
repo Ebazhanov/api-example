@@ -26,16 +26,16 @@ public class CreateAnAccountPage {
         $(By.id("days")).selectOptionByValue(json.getBirthday().getDay());
         $(By.id("months")).selectOptionByValue(json.getBirthday().getMonth());
         $(By.id("years")).selectOptionByValue(json.getBirthday().getYear());
-        $(By.id("company")).sendKeys("Company");
-        $(By.id("address1")).sendKeys("Qwerty, 123");
-        $(By.id("address2")).sendKeys("zxcvb");
-        $(By.id("city")).sendKeys("Qwerty");
-        $(By.id("id_state")).selectOptionContainingText("Colorado");
-        $(By.id("postcode")).sendKeys("12345");
-        $(By.id("other")).sendKeys("Qwerty");
-        $(By.id("phone")).sendKeys("12345123123");
-        $(By.id("phone_mobile")).sendKeys("12345123123");
-        $(By.id("alias")).sendKeys("hf");
+        $(By.id("company")).setValue(json.getCompany());
+        $(By.id("address1")).setValue(json.getAddress1());
+        $(By.id("address2")).setValue(json.getAddress2());
+        $(By.id("city")).setValue(json.getCity());
+        $(By.id("id_state")).selectOptionContainingText(json.getStateId());
+        $(By.id("postcode")).setValue(json.getPostcode());
+        $(By.id("other")).setValue(json.getOther());
+        $(By.id("phone")).setValue(json.getPhone());
+        $(By.id("phone_mobile")).setValue(json.getPhoneMobile());
+        $(By.id("alias")).setValue(json.getAlias());
         $(By.id("submitAccount")).click();
         return this;
     }

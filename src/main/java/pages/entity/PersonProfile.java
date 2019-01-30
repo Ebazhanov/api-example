@@ -23,5 +23,4 @@ public class PersonProfile {
     String phone;
     String phoneMobile;
     String alias;
-
 }
