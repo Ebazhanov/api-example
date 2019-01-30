@@ -1,10 +1,12 @@
 package com.tests;
 
+import base.BaseClass;
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Selenide;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import org.openqa.selenium.By;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import pages.HomePage;
 
 import java.util.Date;
 
@@ -13,54 +15,38 @@ import static com.codeborne.selenide.WebDriverRunner.url;
 import static junit.framework.TestCase.assertTrue;
 import static org.testng.Assert.assertEquals;
 
-public class WebTest {
+@Feature("Main functionality")
+public class WebTest extends BaseClass {
 
     private String existingUserEmail = "hf_challenge_123456@hf123456.com";
     private String existingUserPassword = "12345678";
 
-    @BeforeMethod
-    public void setUp() {
-        Selenide.open("http://automationpractice.com/index.php");
-    }
-
     @Test
+    @Story("Check registration of a new customer ")
     public void signInTest() {
         String timestamp = String.valueOf(new Date().getTime());
         String email = "hf_challenge_" + timestamp + "@hf" + timestamp.substring(7) + ".com";
-        String name = "Firstname";
-        String surname = "Lastname";
-        $(".login").click();
-        $(By.id("email_create")).setValue(email);
-        $(By.id("SubmitCreate")).click();
-        $(By.id("id_gender2")).click();
-        $(By.id("customer_firstname")).setValue(name);
-        $(By.id("customer_lastname")).setValue(surname);
-        $(By.id("passwd")).setValue("Qwerty");
-        $(By.id("days")).selectOptionByValue("1");
-        $(By.id("months")).selectOptionByValue("1");
-        $(By.id("years")).selectOptionByValue("2000");
-        $(By.id("company")).sendKeys("Company");
-        $(By.id("address1")).sendKeys("Qwerty, 123");
-        $(By.id("address2")).sendKeys("zxcvb");
-        $(By.id("city")).sendKeys("Qwerty");
-        $(By.id("id_state")).selectOptionContainingText("Colorado");
-        $(By.id("postcode")).sendKeys("12345");
-        $(By.id("other")).sendKeys("Qwerty");
-        $(By.id("phone")).sendKeys("12345123123");
-        $(By.id("phone_mobile")).sendKeys("12345123123");
-        $(By.id("alias")).sendKeys("hf");
-        $(By.id("submitAccount")).click();
+        String firstName = "Firstname";
+        String lastName = "Lastname";
+        new HomePage()
+                .signInButton()
+                .enterEmailInAccountBlock(email)
+                .creatAnAccountButton()
+                .fillInPersonalData("John")
+        ;
         $("h1").waitUntil(Condition.visible, 1000).shouldHave(Condition.text("MY ACCOUNT"));
-        assertEquals($(By.className("account")).getText(), name + " " + surname);
+        assertEquals($(By.className("account")).getText(), firstName + " " + lastName);
         assertTrue($(By.className("info-account")).getText().contains("Welcome to your account."));
         assertTrue($(By.className("logout")).isDisplayed());
         assertTrue(url().contains("controller=my-account"));
     }
 
     @Test
+    @Story("Check login with existing Customer")
     public void logInTest() {
         String fullName = "Joe Black";
-        $(".login").click();
+        new HomePage()
+                .signInButton();
         $(By.id("email")).setValue(existingUserEmail);
         $(By.id("passwd")).setValue(existingUserPassword);
         $(By.id("SubmitLogin")).click();
@@ -73,7 +59,8 @@ public class WebTest {
 
     @Test
     public void checkoutTest() {
-        $(".login").click();
+        new HomePage()
+                .signInButton();
         $(By.id("email")).sendKeys(existingUserEmail);
         $(By.id("passwd")).sendKeys(existingUserPassword);
         $(By.id("SubmitLogin")).click();

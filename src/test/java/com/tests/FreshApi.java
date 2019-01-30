@@ -18,7 +18,7 @@ import static org.hamcrest.Matchers.nullValue;
 import static org.testng.Assert.assertEquals;
 
 @Feature("API test examples")
-public class Fresh extends BaseClass {
+public class FreshApi extends BaseClass {
 
     public static final String REGISTER = "/register/";
     public static final String GET_ALL = "/get/all";
