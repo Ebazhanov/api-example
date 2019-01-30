@@ -4,19 +4,20 @@ import api.countries.CountriesIsoCode;
 import api.country.CountryCodeNew;
 import api.country.CountryIsoCode;
 import api.restapi.CountryRequest;
-import junitparams.JUnitParamsRunner;
-import org.junit.runner.RunWith;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-@RunWith(JUnitParamsRunner.class)
-public class NewFresh {
+import static org.assertj.core.api.Assertions.assertThat;
+
+public class FreshApiNew {
 
     @Test
     public void getAllCountriesDeUsGbTest() {
+        CountriesIsoCode countries = new CountryRequest()
+                .getAllCountries();
 
-        CountriesIsoCode countries = new CountryRequest().getAllCountries();
-        assertThat(countries).extracting("RestResponse")
+        assertThat(countries)
+                .extracting("RestResponse")
                 .flatExtracting("result")
                 .extracting("alpha2_code")
                 .contains("DE", "US", "GB");

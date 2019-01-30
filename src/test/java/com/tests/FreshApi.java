@@ -18,11 +18,15 @@ import static org.hamcrest.Matchers.nullValue;
 import static org.testng.Assert.assertEquals;
 
 @Feature("API test examples")
-public class Fresh extends BaseClass {
+public class FreshApi extends BaseClass {
+
+    public static final String REGISTER = "/register/";
+    public static final String GET_ALL = "/get/all";
+    public static final String GET_ISO_2_CODE = "/get/iso2code/";
 
     @Test(dataProvider = "countryValidation", dataProviderClass = DataProviderStorage.class)
     @Description("Get each country (US, DE and GB) individually and validate the response")
-    public void getRequestWithSeveralCountries(String name, String alfa2Code, String alfa3Code) {
+    public void shouldRequestWithSeveralCountries(String name, String alfa2Code, String alfa3Code) {
         final String resultsApiJson = countryGetRequest("get/iso2code/", alfa2Code);
         final ApiJson apiJson = ApiJson.from(resultsApiJson);
         final CountryCode result = apiJson.getCountryCode();
@@ -33,10 +37,10 @@ public class Fresh extends BaseClass {
 
     @Test
     @Description("Get all countries and validate that US, DE and GB were returned in the response")
-    public void getRequestAllCountries() {
+    public void shouldRequestAllCountries() {
         RestAssured
                 .given()
-                .get("http://services.groupkt.com/country/get/all")
+                .get(GET_ALL)
                 .then()
                 .statusCode(200)
                 .log().all()
@@ -46,10 +50,10 @@ public class Fresh extends BaseClass {
 
     @Test
     @Description("Get information for non-existent countries and validate the response")
-    public void getRequestWithNonExistentCountry() {
+    public void shouldRequestWithNonExistentCountry() {
         String nonExistentCountry = "RR";
         RestAssured.given()
-                .get("/get/iso2code/" + nonExistentCountry)
+                .get(GET_ISO_2_CODE + nonExistentCountry)
                 .then()
                 .statusCode(200)
                 .log().all()
@@ -59,19 +63,19 @@ public class Fresh extends BaseClass {
 
     @Test
     @Description("validate new country addition using POST")
-    public void postSpecific_TC() {
+    public void shouldPostSpecific_TC() {
         String name = "Test Country";
         String alfa2Code = "TC";
         String alfa3Code = "TC";
         given().contentType("application/json")
                 .body(getJson(name, alfa2Code, alfa3Code))
                 .when()
-                .post("/register/")
+                .post(REGISTER)
                 .then()
                 .assertThat()
                 .statusCode(200)
                 .log().all()
-                .body("message", Matchers.contains("ullnllnullnullvar"));
+                .body("RestResponse.messages[0]", Matchers.contains("ullnllnullnullvar"));
     }
 
     private String getJson(String name, String alpha2Code, String alpha3Code) {
