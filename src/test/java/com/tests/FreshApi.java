@@ -15,6 +15,7 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
+import static api.GetRequest.countriesGetRequest;
 import static api.GetRequest.countryGetRequest;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.hasItems;
@@ -41,7 +42,7 @@ public class FreshApi extends BaseApiClass {
 
     @Test
     public void shouldRequestWithSeveralCountries() {
-        final String resultsApiJson = countryGetRequest("get/all", "asdfasdf");
+        final String resultsApiJson = countriesGetRequest("get/all");
         final ApiJson apiJson = ApiJson.from(resultsApiJson);
         final List<CountryCode> result = apiJson.getAllCountriesCodes();
         System.out.println(result);
@@ -89,9 +90,6 @@ public class FreshApi extends BaseApiClass {
                 .statusCode(200)
                 //.log().all()
                 .extract();
-
-        /*System.out.println(response.path(""));*/
-
     }
 
     private String getJson(String name, String alpha2Code, String alpha3Code) {

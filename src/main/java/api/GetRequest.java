@@ -18,4 +18,18 @@ public class GetRequest {
                 .asString();
         return json;
     }
+
+    @Step
+    public static String countriesGetRequest(String url) {
+        String json = RestAssured
+                .given()
+                .then()
+                .statusCode(200)
+                .log().all()
+                .when()
+                .get(url)
+                .getBody()
+                .asString();
+        return json;
+    }
 }
