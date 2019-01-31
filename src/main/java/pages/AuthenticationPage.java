@@ -3,18 +3,25 @@ package pages;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
+import java.util.Date;
+
 import static com.codeborne.selenide.Selenide.$;
 
 public class AuthenticationPage {
 
+    private String getRandomEmail() {
+        String timestamp = String.valueOf(new Date().getTime());
+        return "hf_challenge_" + timestamp + "@hf" + timestamp.substring(7) + ".com";
+    }
+
     @Step
-    public AuthenticationPage enterEmailInAccountBlock(String email){
-        $(By.id("email_create")).setValue(email);
+    public AuthenticationPage enterRandomEmailInAccountBlock() {
+        $(By.id("email_create")).setValue(getRandomEmail());
         return this;
     }
 
     @Step
-    public CreateAnAccountPage creatAnAccountButton(){
+    public CreateAnAccountPage creatAnAccountButton() {
         $(By.id("SubmitCreate")).click();
         return new CreateAnAccountPage();
     }
@@ -32,8 +39,8 @@ public class AuthenticationPage {
     }
 
     @Step
-    public AuthenticationPage clickSignInButton() {
+    public MyAccountPage clickSignInButton() {
         $(By.id("SubmitLogin")).click();
-        return this;
+        return new MyAccountPage();
     }
 }

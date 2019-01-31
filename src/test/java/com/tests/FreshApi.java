@@ -7,6 +7,8 @@ import base.BaseApiClass;
 import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
 import io.restassured.RestAssured;
+import io.restassured.response.ExtractableResponse;
+import io.restassured.response.Response;
 import org.hamcrest.Matchers;
 import org.json.JSONObject;
 import org.testng.annotations.Test;
@@ -67,15 +69,19 @@ public class FreshApi extends BaseApiClass {
         String name = "Test Country";
         String alfa2Code = "TC";
         String alfa3Code = "TC";
-        given().contentType("application/json")
+        ExtractableResponse<Response> response = given()
+                .contentType("application/json")
                 .body(getJson(name, alfa2Code, alfa3Code))
                 .when()
                 .post(REGISTER)
                 .then()
                 .assertThat()
                 .statusCode(200)
-                .log().all()
-                .body("RestResponse.messages[0]", Matchers.contains("ullnllnullnullvar"));
+                //.log().all()
+                .extract();
+
+        /*System.out.println(response.path(""));*/
+
     }
 
     private String getJson(String name, String alpha2Code, String alpha3Code) {

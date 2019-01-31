@@ -14,7 +14,6 @@ public class FreshApiNew {
     public void getAllCountriesDeUsGbTest() {
         CountriesIsoCode countries = new CountryRequest()
                 .getAllCountries();
-
         assertThat(countries)
                 .extracting("RestResponse")
                 .flatExtracting("result")
