@@ -1,4 +1,4 @@
-package helper;
+package helpers;
 
 import com.codeborne.selenide.Screenshots;
 import com.google.common.io.Files;

@@ -1,4 +1,4 @@
-package api.helpers;
+package helpers;
 
 
 public class ConfigurationManager {

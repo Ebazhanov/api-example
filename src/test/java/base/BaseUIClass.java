@@ -2,7 +2,7 @@ package base;
 
 
 import com.codeborne.selenide.Selenide;
-import helper.ScreenshotOnFailure;
+import helpers.ScreenshotOnFailure;
 import io.restassured.RestAssured;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;

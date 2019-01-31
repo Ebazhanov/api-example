@@ -2,7 +2,7 @@ package pages;
 
 import com.codeborne.selenide.Condition;
 import com.google.gson.Gson;
-import helper.ResourceLoader;
+import helpers.ResourceLoader;
 import io.qameta.allure.Step;
 import pages.entity.PersonProfile;
 

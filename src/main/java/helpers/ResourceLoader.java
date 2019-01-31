@@ -1,7 +1,10 @@
-package api.helpers;
+package helpers;
+import com.google.common.base.Charsets;
+import com.google.common.io.Resources;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
@@ -32,6 +35,17 @@ public class ResourceLoader {
             propertyValue = prop.getProperty(name);
         }
         return propertyValue;
+    }
+
+    public static String getResourceAsString(String resourcePath) {
+        String resourceString = "";
+
+        try {
+            resourceString = Resources.toString(Resources.getResource(resourcePath), Charsets.UTF_8);
+        } catch (IOException e) {
+            log.error("Failed to read resource as string: " + resourcePath, e);
+        }
+        return resourceString;
     }
 
 }

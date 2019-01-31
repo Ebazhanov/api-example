@@ -13,6 +13,8 @@ import org.hamcrest.Matchers;
 import org.json.JSONObject;
 import org.testng.annotations.Test;
 
+import java.util.List;
+
 import static api.GetRequest.countryGetRequest;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.hasItems;
@@ -35,6 +37,14 @@ public class FreshApi extends BaseApiClass {
         assertEquals(result.getName(), name);
         assertEquals(result.getAlpha2Code(), alfa2Code);
         assertEquals(result.getAlpha3Code(), alfa3Code);
+    }
+
+    @Test
+    public void shouldRequestWithSeveralCountries() {
+        final String resultsApiJson = countryGetRequest("get/all", "asdfasdf");
+        final ApiJson apiJson = ApiJson.from(resultsApiJson);
+        final List<CountryCode> result = apiJson.getAllCountriesCodes();
+        System.out.println(result.hashCode());
     }
 
     @Test

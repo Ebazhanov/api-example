@@ -3,7 +3,7 @@
 <suite name="Integration test" parallel="methods" thread-count="3">
     <test name="search test">
         <classes>
-            <class name="com.tests.WebTest"/>
+            <class name="com.tests.FreshApi"/>
         </classes>
     </test>
 </suite>
