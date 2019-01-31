@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Integration test" parallel="methods" thread-count="3">
-    <test name="search test">
+<suite name="Integration tests" parallel="methods" thread-count="3">
+    <test name="API + UI tests">
         <packages>
             <package name="com.tests.*"/>
         </packages>

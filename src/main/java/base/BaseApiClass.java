@@ -4,12 +4,15 @@ package base;
 import io.restassured.RestAssured;
 import org.testng.annotations.BeforeMethod;
 
+import static helpers.ResourceLoader.loadPropertyName;
+
 
 public class BaseApiClass {
 
     @BeforeMethod(alwaysRun = true)
     public void beforeTest() {
-        RestAssured.baseURI = "http://services.groupkt.com/country/";
+        RestAssured.baseURI = loadPropertyName("API_BASE_URL");
+                //http://services.groupkt.com/country/";
     }
 
 }

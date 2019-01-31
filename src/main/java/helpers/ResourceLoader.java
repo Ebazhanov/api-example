@@ -1,4 +1,5 @@
 package helpers;
+
 import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
 import org.slf4j.Logger;
@@ -12,10 +13,10 @@ import static java.lang.ClassLoader.getSystemClassLoader;
 
 public class ResourceLoader {
 
+    private static final String appPropertiesFileName = "testdata.properties";
     private static Logger log = LoggerFactory.getLogger(ResourceLoader.class);
-    private static final String appPropertiesFileName = "application.properties";
 
-    public static String loadAppProperty(String name) {
+    public static String loadPropertyName(String name) {
         return loadProperty(name, appPropertiesFileName);
     }
 
@@ -24,13 +25,11 @@ public class ResourceLoader {
         Properties prop = new Properties();
         getSystemClassLoader();
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-
         try (InputStream is = classLoader.getResourceAsStream(filename)) {
             prop.load(is);
         } catch (Exception e) {
             log.error("Failed to get property: " + name, e);
         }
-
         if (name != null) {
             propertyValue = prop.getProperty(name);
         }
@@ -39,7 +38,6 @@ public class ResourceLoader {
 
     public static String getResourceAsString(String resourcePath) {
         String resourceString = "";
-
         try {
             resourceString = Resources.toString(Resources.getResource(resourcePath), Charsets.UTF_8);
         } catch (IOException e) {
