@@ -44,7 +44,7 @@ public class FreshApi extends BaseApiClass {
         final String resultsApiJson = countryGetRequest("get/all", "asdfasdf");
         final ApiJson apiJson = ApiJson.from(resultsApiJson);
         final List<CountryCode> result = apiJson.getAllCountriesCodes();
-        System.out.println(result.hashCode());
+        System.out.println(result);
     }
 
     @Test
