@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.WebDriverRunner.url;
+import static org.testng.Assert.assertTrue;
 import static pages.CreateAccountPageLocators.ACCOUNT_NAME;
 
 public class MyAccountPage {
@@ -23,7 +24,8 @@ public class MyAccountPage {
         $(HEADER_ACCOUNT).waitUntil(Condition.visible, 1000).shouldHave(Condition.text("MY ACCOUNT"));
         $(INFO_ACCOUNT_TEXT).shouldHave(Condition.text("Welcome to your account."));
         $(LOGOUT).shouldBe(Condition.visible);
-        url().contains(PART_OF_URL_MY_ACCOUNT);
+        assertTrue(url().contains(PART_OF_URL_MY_ACCOUNT));
         return this;
     }
+
 }

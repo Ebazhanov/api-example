@@ -7,8 +7,6 @@ import base.BaseApiClass;
 import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
 import io.restassured.RestAssured;
-import io.restassured.response.ExtractableResponse;
-import io.restassured.response.Response;
 import org.hamcrest.Matchers;
 import org.json.JSONObject;
 import org.testng.annotations.Test;
@@ -41,11 +39,10 @@ public class FreshApi extends BaseApiClass {
     }
 
     @Test
-    public void shouldRequestWithSeveralCountries() {
+    public void shouldRequestWithSeveral() {
         final String resultsApiJson = countriesGetRequest("get/all");
         final ApiJson apiJson = ApiJson.from(resultsApiJson);
         final List<CountryCode> result = apiJson.getAllCountriesCodes();
-        System.out.println(result);
     }
 
     @Test
@@ -80,7 +77,7 @@ public class FreshApi extends BaseApiClass {
         String name = "Test Country";
         String alfa2Code = "TC";
         String alfa3Code = "TC";
-        ExtractableResponse<Response> response = given()
+        given()
                 .contentType("application/json")
                 .body(getJson(name, alfa2Code, alfa3Code))
                 .when()
@@ -90,6 +87,8 @@ public class FreshApi extends BaseApiClass {
                 .statusCode(200)
                 //.log().all()
                 .extract();
+
+        //TODO add GET verification
     }
 
     private String getJson(String name, String alpha2Code, String alpha3Code) {

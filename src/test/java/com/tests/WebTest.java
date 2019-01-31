@@ -64,7 +64,7 @@ public class WebTest extends BaseUIClass {
         $("h1").waitUntil(Condition.visible, 1000).shouldHave(Condition.text("ORDER CONFIRMATION"));
         $(By.xpath("//li[@class='step_done step_done_last four']")).shouldBe(Condition.visible);
         $(By.xpath("//li[@id='step_end' and @class='step_current last']")).shouldBe(Condition.visible);
-        $(By.xpath("//*[@class='cheque-indent']/strong")).text().contains("Your order on My Store is complete.");
+        $(By.xpath("//*[@class='cheque-indent']/strong")).shouldHave(Condition.text("Your order on My Store is complete."));
         assertTrue(url().contains("controller=order-confirmation"));
         sleep(50000);
     }
