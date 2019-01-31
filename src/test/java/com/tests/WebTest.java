@@ -9,7 +9,6 @@ import org.testng.annotations.Test;
 import pages.HomePage;
 
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.sleep;
 import static com.codeborne.selenide.WebDriverRunner.url;
 import static junit.framework.TestCase.assertTrue;
 
@@ -66,7 +65,7 @@ public class WebTest extends BaseUIClass {
         $(By.xpath("//li[@id='step_end' and @class='step_current last']")).shouldBe(Condition.visible);
         $(By.xpath("//*[@class='cheque-indent']/strong")).shouldHave(Condition.text("Your order on My Store is complete."));
         assertTrue(url().contains("controller=order-confirmation"));
-        sleep(50000);
+        //WSAsleep(50000);
     }
 
 }

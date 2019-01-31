@@ -43,4 +43,5 @@ public class AuthenticationPage {
         $(By.id("SubmitLogin")).click();
         return new MyAccountPage();
     }
+
 }
