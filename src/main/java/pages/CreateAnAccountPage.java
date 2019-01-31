@@ -1,15 +1,15 @@
 package pages;
 
+import com.codeborne.selenide.Condition;
 import com.google.gson.Gson;
-import helper.ResourceLoader;
+import helpers.ResourceLoader;
 import io.qameta.allure.Step;
-import org.openqa.selenium.By;
 import pages.entity.PersonProfile;
 
 import static com.codeborne.selenide.Selenide.$;
 import static java.lang.String.format;
 
-public class CreateAnAccountPage {
+public class CreateAnAccountPage extends CreateAccountPageLocators {
 
     private static PersonProfile getJsonData(String jsonFileName) {
         String pathToResourcesFolder = ResourceLoader.getResourceAsString(format("users/%s.json", jsonFileName));
@@ -17,27 +17,28 @@ public class CreateAnAccountPage {
     }
 
     @Step
-    public CreateAnAccountPage fillInPersonalData(String registrationData) {
+    public MyAccountPage fillInPersonalData(String registrationData) {
         PersonProfile json = getJsonData(registrationData);
-        $(By.id("id_gender2")).click();
-        $(By.id("customer_firstname")).setValue(json.getFirstName());
-        $(By.id("customer_lastname")).setValue(json.getLastName());
-        $(By.id("passwd")).setValue(json.getPassword());
-        $(By.id("days")).selectOptionByValue(json.getBirthday().getDay());
-        $(By.id("months")).selectOptionByValue(json.getBirthday().getMonth());
-        $(By.id("years")).selectOptionByValue(json.getBirthday().getYear());
-        $(By.id("company")).setValue(json.getCompany());
-        $(By.id("address1")).setValue(json.getAddress1());
-        $(By.id("address2")).setValue(json.getAddress2());
-        $(By.id("city")).setValue(json.getCity());
-        $(By.id("id_state")).selectOptionContainingText(json.getStateId());
-        $(By.id("postcode")).setValue(json.getPostcode());
-        $(By.id("other")).setValue(json.getOther());
-        $(By.id("phone")).setValue(json.getPhone());
-        $(By.id("phone_mobile")).setValue(json.getPhoneMobile());
-        $(By.id("alias")).setValue(json.getAlias());
-        $(By.id("submitAccount")).click();
-        return this;
+        $(MRS_GENDER_RADIO_BOX).click();
+        $(CUSTOMER_FIRSTNAME).setValue(json.getFirstName());
+        $(CUSTOMER_LASTNAME).setValue(json.getLastName());
+        $(CUSTOMER_PASSWD).setValue(json.getPassword());
+        $(DAYS_OF_BITHDAY).selectOptionByValue(json.getBirthday().getDay());
+        $(MONTHS_OF_BITHDAY).selectOptionByValue(json.getBirthday().getMonth());
+        $(YEARS_OF_BITHDAY).selectOptionByValue(json.getBirthday().getYear());
+        $(COMPANY_OF_BITHDAY).setValue(json.getCompany());
+        $(ADDRESS_1).setValue(json.getAddress1());
+        $(ADDRESS_2).setValue(json.getAddress2());
+        $(CITY_FIELD).setValue(json.getCity());
+        $(STATE_NAME_FIELD).selectOptionContainingText(json.getStateId());
+        $(POSTCODE_FIELD).setValue(json.getPostcode());
+        $(OTHER_FIELD).setValue(json.getOther());
+        $(PHONE_FIELD).setValue(json.getPhone());
+        $(PHONE_MOBILE_FIELD).setValue(json.getPhoneMobile());
+        $(ALIAS).setValue(json.getAlias());
+        $(SUBMIT_ACCOUNT_BUTTON).click();
+        $(ACCOUNT_NAME).shouldHave(Condition.text(json.getFirstName() + " " + json.getLastName()));
+        return new MyAccountPage();
     }
 
 }

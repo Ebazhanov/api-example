@@ -3,13 +3,17 @@ package com.tests;
 import api.ApiJson;
 import api.DataProviderStorage;
 import api.schema.CountryCode;
-import base.BaseClass;
+import base.BaseApiClass;
 import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
 import io.restassured.RestAssured;
+import io.restassured.response.ExtractableResponse;
+import io.restassured.response.Response;
 import org.hamcrest.Matchers;
 import org.json.JSONObject;
 import org.testng.annotations.Test;
+
+import java.util.List;
 
 import static api.GetRequest.countryGetRequest;
 import static io.restassured.RestAssured.given;
@@ -18,7 +22,7 @@ import static org.hamcrest.Matchers.nullValue;
 import static org.testng.Assert.assertEquals;
 
 @Feature("API test examples")
-public class FreshApi extends BaseClass {
+public class FreshApi extends BaseApiClass {
 
     public static final String REGISTER = "/register/";
     public static final String GET_ALL = "/get/all";
@@ -33,6 +37,14 @@ public class FreshApi extends BaseClass {
         assertEquals(result.getName(), name);
         assertEquals(result.getAlpha2Code(), alfa2Code);
         assertEquals(result.getAlpha3Code(), alfa3Code);
+    }
+
+    @Test
+    public void shouldRequestWithSeveralCountries() {
+        final String resultsApiJson = countryGetRequest("get/all", "asdfasdf");
+        final ApiJson apiJson = ApiJson.from(resultsApiJson);
+        final List<CountryCode> result = apiJson.getAllCountriesCodes();
+        System.out.println(result.hashCode());
     }
 
     @Test
@@ -67,15 +79,19 @@ public class FreshApi extends BaseClass {
         String name = "Test Country";
         String alfa2Code = "TC";
         String alfa3Code = "TC";
-        given().contentType("application/json")
+        ExtractableResponse<Response> response = given()
+                .contentType("application/json")
                 .body(getJson(name, alfa2Code, alfa3Code))
                 .when()
                 .post(REGISTER)
                 .then()
                 .assertThat()
                 .statusCode(200)
-                .log().all()
-                .body("RestResponse.messages[0]", Matchers.contains("ullnllnullnullvar"));
+                //.log().all()
+                .extract();
+
+        /*System.out.println(response.path(""));*/
+
     }
 
     private String getJson(String name, String alpha2Code, String alpha3Code) {

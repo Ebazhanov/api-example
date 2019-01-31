@@ -1,29 +1,23 @@
-package helper;
-
+package helpers;
 import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
-import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pages.entity.PersonProfile;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
 import static java.lang.ClassLoader.getSystemClassLoader;
-import static java.lang.String.format;
 
 public class ResourceLoader {
 
     private static Logger log = LoggerFactory.getLogger(ResourceLoader.class);
-
     private static final String appPropertiesFileName = "application.properties";
 
     public static String loadAppProperty(String name) {
         return loadProperty(name, appPropertiesFileName);
     }
-
 
     private static String loadProperty(String name, String filename) {
         String propertyValue = "";
@@ -41,7 +35,6 @@ public class ResourceLoader {
             propertyValue = prop.getProperty(name);
         }
         return propertyValue;
-
     }
 
     public static String getResourceAsString(String resourcePath) {
@@ -54,6 +47,5 @@ public class ResourceLoader {
         }
         return resourceString;
     }
-
 
 }

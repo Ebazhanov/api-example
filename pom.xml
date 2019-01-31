@@ -10,7 +10,8 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <aspectj.version>1.9.2</aspectj.version>
+        <aspectj.version>1.8.10</aspectj.version>
+        <allure.maven.plugin.version>2.8</allure.maven.plugin.version>
     </properties>
     <build>
         <resources>
@@ -70,8 +71,7 @@
                 <artifactId>allure-maven</artifactId>
                 <version>2.8</version>
                 <configuration>
-                    <reportVersion>2.3.1</reportVersion>
-                    <resultsDirectory>allure-results</resultsDirectory>
+                    <reportVersion>2.6</reportVersion>
                 </configuration>
             </plugin>
         </plugins>
@@ -144,6 +144,25 @@
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.8.5</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13-beta-1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>pl.pragmatists</groupId>
+            <artifactId>JUnitParams</artifactId>
+            <version>1.1.1</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.assertj/assertj-core -->
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>3.11.1</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>
