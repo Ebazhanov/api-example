@@ -1,6 +1,6 @@
 package com.tests;
 
-import base.BaseClass;
+import base.BaseUIClass;
 import com.codeborne.selenide.Condition;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
@@ -16,7 +16,7 @@ import static junit.framework.TestCase.assertTrue;
 import static org.testng.Assert.assertEquals;
 
 @Feature("Main functionality")
-public class WebTest extends BaseClass {
+public class WebTest extends BaseUIClass {
 
     private String existingUserEmail = "hf_challenge_123456@hf123456.com";
     private String existingUserPassword = "12345678";

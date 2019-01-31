@@ -6,7 +6,7 @@ import io.restassured.RestAssured;
 import org.testng.annotations.BeforeMethod;
 
 
-public class BaseClass {
+public class BaseUIClass {
 
     @BeforeMethod(alwaysRun = true)
     public void beforeTest() {

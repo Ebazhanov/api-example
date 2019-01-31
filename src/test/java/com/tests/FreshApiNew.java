@@ -4,7 +4,6 @@ import api.countries.CountriesIsoCode;
 import api.country.CountryCodeNew;
 import api.country.CountryIsoCode;
 import api.restapi.CountryRequest;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -31,7 +30,6 @@ public class FreshApiNew {
         };
     }
 
-    @Parameters
     @Test
     public void getCountryCodeTest(CountryCodeNew countryIsoCodeExpected) {
         CountryIsoCode countryIsoCodeActual = new CountryRequest().getCountry(countryIsoCodeExpected.getAlpha2_code());

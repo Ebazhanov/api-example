@@ -3,7 +3,7 @@ package com.tests;
 import api.ApiJson;
 import api.DataProviderStorage;
 import api.schema.CountryCode;
-import base.BaseClass;
+import base.BaseApiClass;
 import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
 import io.restassured.RestAssured;
@@ -18,7 +18,7 @@ import static org.hamcrest.Matchers.nullValue;
 import static org.testng.Assert.assertEquals;
 
 @Feature("API test examples")
-public class FreshApi extends BaseClass {
+public class FreshApi extends BaseApiClass {
 
     public static final String REGISTER = "/register/";
     public static final String GET_ALL = "/get/all";
