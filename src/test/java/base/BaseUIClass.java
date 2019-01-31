@@ -2,10 +2,12 @@ package base;
 
 
 import com.codeborne.selenide.Selenide;
+import helper.ScreenshotOnFailure;
 import io.restassured.RestAssured;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 
-
+@Listeners(ScreenshotOnFailure.class)
 public class BaseUIClass {
 
     @BeforeMethod(alwaysRun = true)
