@@ -13,11 +13,11 @@ import static java.lang.ClassLoader.getSystemClassLoader;
 
 public class ResourceLoader {
 
-    private static final String appPropertiesFileName = "testdata.properties";
+    private static final String APP_PROPERTIES_FILE_NAME = "dev.properties";
     private static Logger log = LoggerFactory.getLogger(ResourceLoader.class);
 
     public static String loadPropertyName(String name) {
-        return loadProperty(name, appPropertiesFileName);
+        return loadProperty(name, APP_PROPERTIES_FILE_NAME);
     }
 
     private static String loadProperty(String name, String filename) {

@@ -10,10 +10,10 @@ import static pages.CreateAccountPageLocators.ACCOUNT_NAME;
 
 public class MyAccountPage {
 
-    protected static final String HEADER_ACCOUNT = "h1";
-    protected static final By INFO_ACCOUNT_TEXT = By.className("info-account");
-    protected static final By LOGOUT = By.className("logout");
-    protected static final String PART_OF_URL_MY_ACCOUNT = "controller=my-account";
+    private static final String HEADER_ACCOUNT = "h1";
+    private static final By INFO_ACCOUNT_TEXT = By.className("info-account");
+    private static final By LOGOUT = By.className("logout");
+    private static final String PART_OF_URL_MY_ACCOUNT = "controller=my-account";
 
     public MyAccountPage verifyFirstLastName(String firstLastName) {
         $(ACCOUNT_NAME).shouldHave(Condition.text(firstLastName));
