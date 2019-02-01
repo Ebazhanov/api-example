@@ -12,7 +12,6 @@ public class BaseApiClass {
     @BeforeMethod(alwaysRun = true)
     public void beforeTest() {
         RestAssured.baseURI = loadPropertyName("API_BASE_URL");
-                //http://services.groupkt.com/country/";
     }
 
 }

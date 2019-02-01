@@ -9,9 +9,8 @@
 
 ```mvn allure:serve```
 
-### Assignment Criteria and Status
+### Done
 
-- [x] Get all countries and validate that US, DE and GB were returned in the response
-- [x] Get each country (US, DE and GB) individually and validate the response
-- [x] Try to get information for non-existent countries and validate the response
-- [x] This API has not a POST method at the moment, but it is being developed. Write a test that would validate new country addition using POST(it will not work now, but no worries).
+- [x] run tests in parallel mode;
+- [x] ability to run tests for different browsers/OS by configuring;
+- [x] ability to run tests for different environments(urls) by configuring/by command-line.
