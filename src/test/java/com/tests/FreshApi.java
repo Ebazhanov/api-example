@@ -12,25 +12,27 @@ import org.json.JSONObject;
 import org.testng.annotations.Test;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import static api.GetRequest.countriesGetRequest;
 import static api.GetRequest.countryGetRequest;
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.nullValue;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 @Feature("API test examples")
 public class FreshApi extends BaseApiClass {
 
-    public static final String REGISTER = "/register/";
-    public static final String GET_ALL = "/get/all";
-    public static final String GET_ISO_2_CODE = "/get/iso2code/";
+    private static final String REGISTER = "/register/";
+    private static final String GET_ALL = "/get/all";
+    private static final String GET_ISO_2_CODE = "/get/iso2code/";
 
     @Test(dataProvider = "countryValidation", dataProviderClass = DataProviderStorage.class)
     @Description("Get each country (US, DE and GB) individually and validate the response")
     public void shouldRequestWithSeveralCountries(String name, String alfa2Code, String alfa3Code) {
-        final String resultsApiJson = countryGetRequest("get/iso2code/", alfa2Code);
+        final String resultsApiJson = countryGetRequest(GET_ISO_2_CODE, alfa2Code);
         final ApiJson apiJson = ApiJson.from(resultsApiJson);
         final CountryCode result = apiJson.getCountryCode();
         assertEquals(result.getName(), name);
@@ -40,22 +42,13 @@ public class FreshApi extends BaseApiClass {
 
     @Test
     public void shouldRequestWithSeveral() {
-        final String resultsApiJson = countriesGetRequest("get/all");
+        final String resultsApiJson = countriesGetRequest(GET_ALL);
         final ApiJson apiJson = ApiJson.from(resultsApiJson);
         final List<CountryCode> result = apiJson.getAllCountriesCodes();
-    }
-
-    @Test
-    @Description("Get all countries and validate that US, DE and GB were returned in the response")
-    public void shouldRequestAllCountries() {
-        RestAssured
-                .given()
-                .get(GET_ALL)
-                .then()
-                .statusCode(200)
-                .log().all()
-                .body("RestResponse.result.alpha2_code", hasItems("US", "GB", "DE"))
-                .body("RestResponse.result.alpha3_code", hasItems("USA", "GBR", "DEU"));
+        final Set<String> alphaCodes = result.stream().map(CountryCode::getAlpha2Code).collect(Collectors.toSet());
+        assertTrue(alphaCodes.contains("US"));
+        assertTrue(alphaCodes.contains("GB"));
+        assertTrue(alphaCodes.contains("DE"));
     }
 
     @Test

@@ -1,7 +1,7 @@
 # api-example
 
 
-### how to run
+### How to run
 
 ```mvn clean test```
 
