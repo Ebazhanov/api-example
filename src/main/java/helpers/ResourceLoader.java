@@ -13,7 +13,7 @@ import static java.lang.ClassLoader.getSystemClassLoader;
 
 public class ResourceLoader {
 
-    private static final String APP_PROPERTIES_FILE_NAME = "dev.properties";
+    private static final String APP_PROPERTIES_FILE_NAME = "test.properties";
     private static Logger log = LoggerFactory.getLogger(ResourceLoader.class);
 
     public static String loadPropertyName(String name) {

@@ -13,14 +13,24 @@ import static helpers.ResourceLoader.loadPropertyName;
 @Listeners(ScreenshotOnFailure.class)
 public class BaseUIClass {
 
-    @Parameters({"browser","deviceName"})
-    @BeforeTest(alwaysRun = true)
-    public void beforeTest(@Optional String browser, @Optional String deviceName) {
-        selectBrowser(browser, deviceName);
-        Selenide.open(loadPropertyName("UI_BASE_URL"));
+    private static String baseUrl;
+
+    @Parameters({"env", "browser"})
+    @BeforeMethod(alwaysRun = true)
+    public void beforeTest(@Optional("test") String env, @Optional("chrome") String browser) {
+        selectBrowser(browser);
+        switch (env) {
+            case "test":
+                baseUrl = loadPropertyName("UI_BASE_URL");
+                break;
+            case "prod":
+                baseUrl = loadPropertyName("PROD_UI_BASE_URL");
+                break;
+        }
+        Selenide.open(baseUrl);
     }
 
-    @AfterTest(alwaysRun = true)
+    @AfterMethod(alwaysRun = true)
     void after() {
         clearBrowserCache();
         closeWebDriver();

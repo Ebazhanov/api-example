@@ -1,43 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Integration tests" parallel="methods" thread-count="3">
-    <!--    <test name="API + UI tests">
-            <packages>
-                <package name="com.tests.*"/>
-            </packages>
-        </test>-->
-
-    <test name="desktop - signInTest">
+    <test name="API + UI tests">
         <classes>
-            <class name="com.tests.WebTest">
-                <methods>
-                    <include name="signInTest"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
-    <test name="tablet - signInTest">
-        <parameter name="browser" value="chrome"/>
-        <parameter name="deviceName" value="iPad"/>
-        <classes>
-            <class name="com.tests.WebTest">
-                <methods>
-                    <include name="signInTest"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
-    <test name="mobile - signInTest">
-        <parameter name="browser" value="chrome"/>
-        <parameter name="deviceName" value="iPhone 7"/>
-        <classes>
-            <class name="com.tests.WebTest">
-                <methods>
-                    <include name="signInTest"/>
-                </methods>
-            </class>
+            <class name="com.tests.WebTest"/>
+            <class name="com.tests.FreshApi"/>
         </classes>
     </test>
 </suite>

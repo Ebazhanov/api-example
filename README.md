@@ -12,5 +12,11 @@
 ### Done
 
 - [x] run tests in parallel mode;
-- [x] ability to run tests for different browsers/OS by configuring;
+- [x] ability to run tests for different browsers/mobile devices by configuring;
+
+```mvn package -Dbrowers=firefox``` 
+
 - [x] ability to run tests for different environments(urls) by configuring/by command-line.
+
+```mvn package -Denv=prod``` 
+

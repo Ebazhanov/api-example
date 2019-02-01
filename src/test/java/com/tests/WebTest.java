@@ -61,8 +61,6 @@ public class WebTest extends BaseUIClass {
         $(By.className("bankwire")).click();
         $(By.xpath("//*[@id='cart_navigation']/button")).click();
 
-
-
         $("h1").waitUntil(Condition.visible, 1000).shouldHave(Condition.text("ORDER CONFIRMATION"));
         $(By.xpath("//li[@class='step_done step_done_last four']")).shouldBe(Condition.visible);
         $(By.xpath("//li[@id='step_end' and @class='step_current last']")).shouldBe(Condition.visible);

@@ -78,9 +78,7 @@ public class FreshApi extends BaseApiClass {
                 .then()
                 .assertThat()
                 .statusCode(200)
-                //.log().all()
-                .extract();
-
+                .log().all();
         //TODO add GET verification
     }
 
