@@ -19,6 +19,7 @@ public class BaseUIClass {
     @BeforeMethod(alwaysRun = true)
     public void beforeTest(@Optional("test") String env, @Optional("chrome") String browser) {
         selectBrowser(browser);
+        clearBrowserCache();
         switch (env) {
             case "test":
                 baseUrl = loadPropertyName("UI_BASE_URL");

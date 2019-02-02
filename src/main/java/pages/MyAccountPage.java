@@ -14,6 +14,7 @@ public class MyAccountPage {
     private static final By INFO_ACCOUNT_TEXT = By.className("info-account");
     private static final By LOGOUT = By.className("logout");
     private static final String PART_OF_URL_MY_ACCOUNT = "controller=my-account";
+    private static final By WOMEN_CATEGORY_BOTTOM = By.linkText("Women");
 
     public MyAccountPage verifyFirstLastName(String firstLastName) {
         $(ACCOUNT_NAME).shouldHave(Condition.text(firstLastName));
@@ -28,4 +29,8 @@ public class MyAccountPage {
         return this;
     }
 
+    public MyStorePage clickOnWomenCategoryBottom() {
+        $(WOMEN_CATEGORY_BOTTOM).click();
+        return new MyStorePage();
+    }
 }

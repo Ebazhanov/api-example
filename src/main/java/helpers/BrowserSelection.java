@@ -7,7 +7,7 @@ import io.github.bonigarcia.wdm.DriverManagerType;
 public class BrowserSelection {
 
     public static void selectBrowser(String browser) {
-        if (browser == null) {
+        if (browser.equals("chrome")) {
             Configuration.browser = "Chrome";
             ChromeDriverManager.getInstance(DriverManagerType.CHROME).setup();
         } else if (browser.equals("firefox")) {
@@ -16,7 +16,6 @@ public class BrowserSelection {
         } else {
             throw new IllegalStateException("Browser " + browser + " not supported in tests");
         }
-
     }
 
 }
